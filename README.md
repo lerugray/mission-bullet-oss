@@ -1,5 +1,7 @@
 # mission-bullet
 
+![mission-bullet — Carroll's method, augmented. Open Source · BYOK · Raw is Sacred](docs/images/banner.png)
+
 Personal AI-assisted bullet journal. Daily-capture,
 weekly-process, monthly-reflection. Sits alongside GeneralStaff
 (project management) and mission-brain (second brain). This is the
