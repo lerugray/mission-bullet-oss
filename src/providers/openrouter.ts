@@ -39,8 +39,8 @@ export function createOpenRouterProvider(config: {
           Authorization: `Bearer ${config.apiKey}`,
           // Attribution headers — OpenRouter uses these for its
           // rankings + to identify the calling app in dashboards.
-          "HTTP-Referer": "https://github.com/lerugray/mission-bullet",
-          "X-Title": "mission-bullet",
+          "HTTP-Referer": "https://github.com/lerugray/mission-bullet-oss",
+          "X-Title": "mission-bullet-oss",
         },
         body: JSON.stringify(body),
         ...(options?.signal !== undefined && { signal: options.signal }),
