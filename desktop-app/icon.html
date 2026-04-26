@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* Source files for the taskbar icon. Rendered via main.mjs's
+       --build-icon flag into desktop-app/assets/icon.png. The font
+       stack matches styles.css `--serif`, the color matches `--accent`,
+       and the bg matches `--bg-page` so the icon reads as a continuation
+       of the app's light-mode aesthetic. */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 256px;
+      height: 256px;
+      background: #fdfbf7;
+      font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+    }
+    .frame {
+      width: 256px;
+      height: 256px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      border: 6px solid #7a3b1e;
+      border-radius: 24px;
+    }
+    .mark {
+      font-size: 138px;
+      font-weight: 600;
+      color: #7a3b1e;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="mark">MB</div>
+  </div>
+</body>
+</html>

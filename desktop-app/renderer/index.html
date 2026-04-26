@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-type="iowan">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self' blob:; connect-src 'self' blob: data:;">
+  <title>mission-bullet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    // Browser-mode bootstrap. When the renderer is loaded outside Electron
+    // (phone via Tailscale, laptop browser tab, Capacitor web container),
+    // no preload runs, so window.missionBullet is undefined. Fall back to
+    // an HTTP client that talks to server.mjs — endpoint names mirror the
+    // IPC surface 1:1 so app.jsx / components.jsx don't know the transport.
+    if (!window.missionBullet) {
+      const post = async (path, payload) => {
+        const r = await fetch(path, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload ?? {}),
+        });
+        if (!r.ok) {
+          let msg = `${path} failed · status ${r.status}`;
+          try { const j = await r.json(); if (j?.error) msg = j.error; } catch (_) {}
+          throw new Error(msg);
+        }
+        return r.json();
+      };
+      window.missionBullet = {
+        loadDays:     (opts)    => post('/api/loadDays', opts ?? {}),
+        knownDates:   ()        => post('/api/knownDates', {}),
+        readBody:     (payload) => post('/api/readBody', payload ?? {}),
+        writeBody:    (payload) => post('/api/writeBody', payload),
+        saveEntry:    (payload) => post('/api/saveEntry', payload),
+        readMonthly:  (payload) => post('/api/readMonthly', payload ?? {}),
+        writeMonthly: (payload) => post('/api/writeMonthly', payload),
+        readReflection: (payload) => post('/api/readReflection', payload ?? {}),
+        readMonthlyReflection: (payload) => post('/api/readMonthlyReflection', payload ?? {}),
+        runReviewWeek: (payload) => post('/api/runReviewWeek', payload),
+        runReviewMonth: (payload) => post('/api/runReviewMonth', payload),
+        saveImage:    (payload) => post('/api/saveImage', payload),
+        readImage:    (payload) => post('/api/readImage', payload),
+        readSketch:   (payload) => post('/api/readSketch', payload ?? {}),
+        writeSketch:  (payload) => post('/api/writeSketch', payload),
+        migrateScan:  (payload) => post('/api/migrateScan', payload ?? {}),
+        migrateApply: (payload) => post('/api/migrateApply', payload),
+        syncNow:      ()        => post('/api/syncNow', {}),
+        syncPull:     ()        => post('/api/syncPull', {}),
+      };
+      // window.missionBulletDev stays false in browser mode — no TweaksPanel
+      // or Mobile preview tab in a real daily-use context.
+      window.missionBulletDev = false;
+    }
+  </script>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <!-- Sketch surface (mb-012). Excalidraw internally prepends
+       "excalidraw-assets/" to the configured path when loading language
+       chunks and fonts, so ASSET_PATH points at the PARENT of that
+       directory (i.e. our sketch/ dir), not the directory itself.
+       Must be set BEFORE bundle.js loads so Excalidraw uses our local
+       copy instead of its default CDN (which CSP blocks). -->
+  <script>window.EXCALIDRAW_ASSET_PATH = "sketch/";</script>
+  <script src="sketch/bundle.js"></script>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="views.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>

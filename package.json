@@ -1,0 +1,32 @@
+{
+  "name": "mission-bullet",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal AI-assisted bullet journal — daily capture, weekly/monthly reflection.",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "bullet": "bun src/index.ts",
+    "build:sketch": "bun desktop-app/build-sketch.mjs",
+    "build:icon": "electron desktop-app/main.mjs --build-icon",
+    "ui": "bun desktop-app/build-sketch.mjs && electron desktop-app/main.mjs",
+    "ui:dev": "bun desktop-app/build-sketch.mjs && electron desktop-app/main.mjs --dev",
+    "ui:serve": "bun desktop-app/build-sketch.mjs && bun desktop-app/server.mjs",
+    "test": "bun test",
+    "typecheck": "bun x tsc --noEmit"
+  },
+  "dependencies": {
+    "@excalidraw/excalidraw": "0.17.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "electron": "^33.0.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "bun": ">=1.1.0"
+  }
+}

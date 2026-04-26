@@ -1,0 +1,63 @@
+# Personal entries — raw daily thoughts, private reflections.
+# NEVER commit. Tracked locally via your own choice of version
+# control, but not in this shared repo. If you ever want local
+# git tracking of entries, use a SEPARATE git repo inside
+# entries/ — not this one.
+entries/
+!entries/.gitkeep
+
+# Weekly + monthly reflections — same privacy posture as entries.
+reflections/
+!reflections/.gitkeep
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Bun / Node
+node_modules/
+bun.lock
+bun.lockb
+dist/
+build/
+*.log
+
+# Sketch bundle (built from desktop-app/renderer/sketch/wrapper.jsx via
+# `bun run build:sketch`, auto-run by `bun run ui` / `ui:serve`).
+desktop-app/renderer/sketch/bundle.js
+desktop-app/renderer/sketch/bundle.css
+desktop-app/renderer/sketch/excalidraw-assets/
+
+# Editor + OS cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Test scratch dirs — wiped between runs but cleaned here in case a
+# test crashes mid-run and leaves residue.
+tmp-*/
+
+# Orchestration scratch — leftover from prior multi-agent runs.
+outbox/
+
+# Unpacked design-review artifacts (zip travels; the unpack does not).
+.design-review/
+
+# Personal planning docs that shouldn't ride into the public repo.
+RELEASE-PLAN.md
+CLAUDE.local.md
+
+# Claude Code — track SKILLs cross-machine, keep per-machine settings local
+.claude/*
+!.claude/skills/
+
+# Claude Design artifacts — local-only.
+claude-design-output/
+mission bullet.zip
+mission_bullet.zip
