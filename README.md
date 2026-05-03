@@ -8,6 +8,11 @@ weekly-process, monthly-reflection. Sits alongside GeneralStaff
 "in-the-moment thought into structured memory" layer that fills
 the gap between them.
 
+If you're running multiple projects through GeneralStaff or any
+AI dispatcher, mission-bullet is your **intent log**. This
+week's priorities live here, so dispatched cycles can read the
+*why* behind each task.
+
 Not a productivity app. Not a replacement for journaling. A
 deliberate tool for the rhythm Ryder Carroll's original bullet
 journal method captured on paper: rapid logging, threaded
@@ -732,9 +737,11 @@ share a design floor: your data on your disk, your keys for paid
 providers, no SaaS layer.
 
 - **[GeneralStaff](https://github.com/lerugray/generalstaff)**.
-  multi-project bot orchestrator with hands-off enforcement and
-  audit logging. Mission-bullet is registered as a Mode B project
-  in GS for its own build-out tracking.
+  multi-project autonomous coding orchestrator with verification
+  gate, hands-off enforcement, and open audit log. Mission-bullet
+  plays two roles: a Mode B project tracked in GS for build-out,
+  and the intent layer dispatched cycles read to stay aimed at
+  this week's priorities.
 - **[mission-brain](https://github.com/lerugray/mission-brain)**.
   queryable second brain over your own writing, citation-grounded
   retrieval. Companion for "what have I written about X?" queries
