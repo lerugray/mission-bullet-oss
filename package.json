@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Personal AI-assisted bullet journal — daily capture, weekly/monthly reflection.",
+  "license": "MIT",
   "scripts": {
     "start": "bun src/index.ts",
     "bullet": "bun src/index.ts",
